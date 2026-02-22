@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AM SAT DZ - أجهزة الاستقبال الفضائي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #1A9FD4;
+    --blue-dark: #0E7AAD;
+    --blue-light: #4DC3F0;
+    --dark: #0D2230;
+    --darker: #071520;
+    --teal: #0A3D55;
+    --white: #FFFFFF;
+    --light-bg: #EAF6FC;
+    --text-muted: #8BAABB;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Cairo', sans-serif; background: #F0F8FC; color: var(--dark); overflow-x: hidden; }
+
+  .top-stripe { height: 4px; background: linear-gradient(90deg, var(--dark) 0%, var(--blue) 40%, var(--blue-light) 60%, var(--blue-dark) 100%); }
+
+  header { background: var(--darker); position: sticky; top: 0; z-index: 100; border-bottom: 2px solid var(--blue); box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
+  .header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; }
+
+  .logo { display: flex; align-items: center; gap: 14px; }
+  .logo-mark { width: 54px; height: 54px; background: linear-gradient(135deg, var(--dark), var(--teal)); border-radius: 12px; border: 2px solid var(--blue); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; box-shadow: 0 0 20px rgba(26,159,212,0.4); }
+  .logo-mark::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 50%, rgba(26,159,212,0.3) 0%, transparent 70%); }
+  .logo-mark span { font-family: 'Tajawal', sans-serif; font-weight: 900; font-size: 15px; color: white; position: relative; z-index: 1; }
+  .logo-text .name { font-family: 'Tajawal', sans-serif; font-size: 24px; font-weight: 900; color: var(--white); letter-spacing: 2px; display: block; }
+  .logo-text .name em { color: var(--blue); font-style: normal; }
+  .logo-text .sub { font-size: 10px; color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; }
+
+  nav { display: flex; gap: 4px; }
+  nav a { color: rgba(255,255,255,0.7); text-decoration: none; font-weight: 600; font-size: 14px; padding: 8px 18px; border-radius: 8px; transition: all 0.25s; border: 1px solid transparent; }
+  nav a:hover { background: rgba(26,159,212,0.15); color: var(--blue-light); border-color: rgba(26,159,212,0.3); }
+
+  /* HERO */
+  .hero { background: linear-gradient(150deg, var(--darker) 0%, var(--teal) 50%, #0D2A3D 100%); min-height: 500px; display: flex; align-items: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: 50%; left: -80px; transform: translateY(-50%); width: 300px; height: 300px; border: 2px solid rgba(26,159,212,0.12); border-radius: 50%; box-shadow: 0 0 0 40px rgba(26,159,212,0.06), 0 0 0 80px rgba(26,159,212,0.03); }
+  .hero::after { content: ''; position: absolute; top: -120px; right: -120px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(26,159,212,0.2) 0%, transparent 65%); animation: glow 5s ease-in-out infinite; }
+  @keyframes glow { 0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.15)} }
+
+  .hero-content { max-width: 1200px; margin: 0 auto; padding: 70px 24px; position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; width: 100%; }
+  .hero-text h1 { font-family: 'Tajawal', sans-serif; font-size: clamp(30px,4.5vw,54px); font-weight: 900; color: var(--white); line-height: 1.25; margin-bottom: 20px; }
+  .hero-text h1 span { color: var(--blue-light); text-shadow: 0 0 30px rgba(77,195,240,0.5); }
+  .hero-text p { color: rgba(255,255,255,0.65); font-size: 16px; line-height: 1.85; margin-bottom: 36px; }
+  .hero-badges { display: flex; gap: 12px; flex-wrap: wrap; }
+  .badge { padding: 10px 20px; border-radius: 50px; font-weight: 700; font-size: 13px; display: flex; align-items: center; gap: 6px; }
+  .badge-blue { background: var(--blue); color: white; box-shadow: 0 4px 15px rgba(26,159,212,0.4); }
+  .badge-outline { background: transparent; color: var(--blue-light); border: 1.5px solid var(--blue); }
+  .badge-white { background: white; color: var(--dark); }
+
+  .hero-visual { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+  .signal-box { width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(26,159,212,0.3) 0%, rgba(26,159,212,0.05) 60%, transparent 100%); display: flex; align-items: center; justify-content: center; position: relative; border: 1.5px solid rgba(26,159,212,0.3); animation: float 3.5s ease-in-out infinite; }
+  .signal-box::before,.signal-box::after { content: ''; position: absolute; border-radius: 50%; border: 1px solid rgba(26,159,212,0.15); animation: ripple 3s ease-out infinite; }
+  .signal-box::before { width: 130%; height: 130%; animation-delay: 0.5s; }
+  .signal-box::after { width: 160%; height: 160%; animation-delay: 1s; }
+  @keyframes ripple { 0%{opacity:.6}100%{opacity:0} }
+  @keyframes float { 0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)} }
+  .signal-icon { font-size: 80px; }
+  .brand-tag { background: rgba(26,159,212,0.12); border: 1px solid rgba(26,159,212,0.4); border-radius: 12px; padding: 14px 28px; text-align: center; }
+  .brand-tag .bname { font-family: 'Tajawal', sans-serif; font-size: 22px; font-weight: 900; color: white; letter-spacing: 3px; }
+  .brand-tag .bname em { color: var(--blue); font-style: normal; }
+  .brand-tag .bsub { font-size: 10px; color: var(--text-muted); letter-spacing: 2px; }
+
+  /* SECTION */
+  section { max-width: 1200px; margin: 0 auto; padding: 60px 24px; }
+  .section-header { text-align: center; margin-bottom: 48px; }
+  .section-header h2 { font-family: 'Tajawal', sans-serif; font-size: 36px; font-weight: 900; color: var(--dark); margin-bottom: 8px; position: relative; display: inline-block; }
+  .section-header h2::after { content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: linear-gradient(90deg, var(--blue-dark), var(--blue-light)); border-radius: 2px; }
+  .section-header p { color: #6699AA; margin-top: 20px; font-size: 16px; }
+
+  /* PRODUCTS */
+  .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; }
+  .product-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 24px rgba(13,34,48,0.08); transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1); border: 1px solid rgba(26,159,212,0.1); }
+  .product-card:hover { transform: translateY(-10px) scale(1.01); box-shadow: 0 24px 60px rgba(13,34,48,0.16), 0 0 0 2px rgba(26,159,212,0.3); }
+  .product-visual { padding: 36px; display: flex; align-items: center; justify-content: center; min-height: 200px; position: relative; }
+  .product-visual.yellow-bg { background: linear-gradient(135deg, #c8e600, #d4f000, #b8d400); }
+  .product-visual.dark-bg { background: linear-gradient(135deg, #0a1a28, #0d2a3e, #071520); }
+  .product-visual.blue-bg { background: linear-gradient(135deg, var(--teal), var(--blue-dark), #0A3050); }
+  .product-box { font-size: 80px; filter: drop-shadow(0 8px 20px rgba(0,0,0,0.3)); transition: transform 0.3s; }
+  .product-card:hover .product-box { transform: scale(1.1) rotate(-3deg); }
+  .product-badge { position: absolute; top: 16px; left: 16px; background: var(--blue); color: white; padding: 6px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; box-shadow: 0 4px 12px rgba(26,159,212,0.5); }
+  .product-badge.hot { background: #E84040; box-shadow: 0 4px 12px rgba(232,64,64,0.5); }
+  .product-badge.deal { background: var(--dark); border: 1px solid var(--blue); }
+  .product-info { padding: 24px; }
+  .product-brand { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); margin-bottom: 6px; }
+  .product-name { font-family: 'Tajawal', sans-serif; font-size: 26px; font-weight: 900; color: var(--dark); margin-bottom: 12px; }
+  .product-desc { font-size: 14px; color: #6699AA; line-height: 1.75; margin-bottom: 20px; }
+  .specs-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .spec-tag { background: var(--light-bg); color: var(--blue-dark); padding: 5px 12px; border-radius: 50px; font-size: 12px; font-weight: 700; border: 1px solid rgba(26,159,212,0.2); }
+  .spec-tag.accent { background: rgba(26,159,212,0.1); color: var(--blue); border-color: rgba(26,159,212,0.35); }
+  .product-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid #EAF4F8; }
+  .price { font-family: 'Tajawal', sans-serif; font-size: 20px; font-weight: 900; color: var(--dark); }
+  .price span { font-size: 13px; color: #9BBBC8; font-weight: 400; }
+  .btn-buy { background: linear-gradient(135deg, var(--blue), var(--blue-dark)); color: white; border: none; padding: 12px 24px; border-radius: 50px; font-family: 'Cairo', sans-serif; font-weight: 700; font-size: 14px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 16px rgba(26,159,212,0.35); }
+  .btn-buy:hover { background: linear-gradient(135deg, var(--blue-light), var(--blue)); transform: scale(1.05); box-shadow: 0 8px 24px rgba(26,159,212,0.5); }
+
+  /* WHY */
+  .why-section { background: linear-gradient(150deg, var(--darker) 0%, var(--teal) 60%, #0D2A3D 100%); padding: 80px 0; position: relative; overflow: hidden; }
+  .why-section::before { content: ''; position: absolute; bottom: -100px; left: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(26,159,212,0.1) 0%, transparent 70%); }
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 24px; }
+  .why-card { text-align: center; padding: 32px 20px; border-radius: 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(26,159,212,0.2); transition: all 0.3s; position: relative; overflow: hidden; }
+  .why-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--blue-dark), var(--blue-light)); opacity: 0; transition: opacity 0.3s; }
+  .why-card:hover { background: rgba(26,159,212,0.08); transform: translateY(-4px); }
+  .why-card:hover::before { opacity: 1; }
+  .why-icon { font-size: 48px; margin-bottom: 16px; display: block; }
+  .why-card h3 { font-family: 'Tajawal', sans-serif; font-size: 18px; font-weight: 700; color: var(--blue-light); margin-bottom: 8px; }
+  .why-card p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.7; }
+
+  /* CONTACT */
+  .contact-section { background: white; border-radius: 24px; padding: 52px 48px; text-align: center; box-shadow: 0 8px 40px rgba(13,34,48,0.12); margin: 0 24px 60px; border: 1.5px solid rgba(26,159,212,0.2); position: relative; overflow: hidden; }
+  .contact-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--darker), var(--blue), var(--blue-light), var(--blue)); }
+  .contact-section h2 { font-family: 'Tajawal', sans-serif; font-size: 32px; font-weight: 900; margin-bottom: 12px; color: var(--dark); }
+  .contact-section p { color: #6699AA; margin-bottom: 32px; font-size: 16px; }
+  .contact-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-whatsapp { background: #25D366; color: white; padding: 14px 32px; border-radius: 50px; font-weight: 700; font-size: 16px; text-decoration: none; display: flex; align-items: center; gap: 10px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(37,211,102,0.35); }
+  .btn-whatsapp:hover { transform: scale(1.05); box-shadow: 0 8px 30px rgba(37,211,102,0.5); }
+  .btn-call { background: var(--dark); color: white; padding: 14px 32px; border-radius: 50px; font-weight: 700; font-size: 16px; text-decoration: none; display: flex; align-items: center; gap: 10px; transition: all 0.3s; border: 1.5px solid var(--blue); }
+  .btn-call:hover { background: var(--blue); transform: scale(1.05); }
+
+  footer { background: var(--darker); color: rgba(255,255,255,0.4); text-align: center; padding: 28px 24px; font-size: 13px; border-top: 2px solid var(--blue); }
+  .brand-footer { font-family: 'Tajawal', sans-serif; font-size: 20px; font-weight: 900; color: white; letter-spacing: 3px; margin-bottom: 6px; }
+  .brand-footer em { color: var(--blue); font-style: normal; }
+
+  @keyframes fadeInUp { from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)} }
+  .product-card { animation: fadeInUp 0.5s ease both; }
+  .product-card:nth-child(2) { animation-delay: 0.1s; }
+  .product-card:nth-child(3) { animation-delay: 0.2s; }
+
+  @media (max-width: 768px) {
+    .hero-content { grid-template-columns: 1fr; gap: 32px; }
+    .hero-visual { display: none; }
+    nav { display: none; }
+    .contact-section { padding: 36px 20px; margin: 0 16px 40px; }
+  }
+</style>
+</head>
+<body>
+<div class="top-stripe"></div>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-mark"><span>AM</span></div>
+      <div class="logo-text">
+        <span class="name"><em>AM</em> SAT <em>DZ</em></span>
+        <span class="sub">Récepteurs Satellite • الجزائر</span>
+      </div>
+    </div>
+    <nav>
+      <a href="#products">المنتجات</a>
+      <a href="#why">لماذا نحن</a>
+      <a href="#contact">اتصل بنا</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1>أفضل أجهزة<br><span>الاستقبال الفضائي</span><br>في الجزائر 🇩🇿</h1>
+      <p>اكتشف مجموعتنا الحصرية من أجهزة الاستقبال الرقمية عالية الجودة — Full HD، WiFi، وأكثر من ذلك بكثير. توصيل لجميع ولايات الجزائر.</p>
+      <div class="hero-badges">
+        <div class="badge badge-blue">✅ ضمان رسمي</div>
+        <div class="badge badge-outline">🚀 توصيل سريع</div>
+        <div class="badge badge-white">⭐ أسعار منافسة</div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="signal-box"><span class="signal-icon">📡</span></div>
+      <div class="brand-tag">
+        <div class="bname"><em>AM</em> SAT <em>DZ</em></div>
+        <div class="bsub">SATELLITE RECEIVER • ALGERIA</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="products">
+  <div class="section-header">
+    <h2>منتجاتنا المميزة</h2>
+    <p>أجود الأجهزة من أشهر العلامات التجارية — متوفرة الآن</p>
+  </div>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <div class="product-visual yellow-bg">
+        <span class="product-badge">🆕 جديد</span>
+        <span class="product-box">📺</span>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">ICONE</div>
+        <div class="product-name">Icone D20</div>
+        <div class="product-desc">جهاز استقبال فضائي رقمي متطور بدقة Full HD مع خاصية WiFi المدمجة. تصميم أنيق وأداء لا مثيل له.</div>
+        <div class="specs-list">
+          <span class="spec-tag accent">📶 WiFi مدمج</span>
+          <span class="spec-tag">🎬 Full HD 1080p</span>
+          <span class="spec-tag">🔌 USB</span>
+          <span class="spec-tag accent">DVB-S2</span>
+          <span class="spec-tag">EPG</span>
+        </div>
+        <div class="product-footer">
+          <div class="price">اتصل للسعر <span>/ دج</span></div>
+          <button class="btn-buy" onclick="window.location='#contact'">🛒 اطلب الآن</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-visual dark-bg">
+        <span class="product-badge hot">🔥 الأكثر مبيعاً</span>
+        <span class="product-box">🛸</span>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">CRISTOR</div>
+        <div class="product-name">Thunder TH500</div>
+        <div class="product-desc">قوة الصوت والصورة في جهاز واحد. جهاز استقبال FHD مع ضمان 12 شهراً وتضمين تحكمين عن بُعد.</div>
+        <div class="specs-list">
+          <span class="spec-tag">📡 FHD رقمي</span>
+          <span class="spec-tag accent">⚡ Thunder</span>
+          <span class="spec-tag">🎮 ريموتان</span>
+          <span class="spec-tag">🏆 ضمان 12م</span>
+          <span class="spec-tag">HDMI</span>
+        </div>
+        <div class="product-footer">
+          <div class="price">اتصل للسعر <span>/ دج</span></div>
+          <button class="btn-buy" onclick="window.location='#contact'">🛒 اطلب الآن</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-visual blue-bg">
+        <span class="product-badge deal">💎 عرض</span>
+        <span class="product-box">🎁</span>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">عرض حصري</div>
+        <div class="product-name">باقة المنزل الذكي</div>
+        <div class="product-desc">احصل على جهازَين بسعر مميز! Icone D20 + Cristor Thunder TH500. مثالي للمنزل والمكتب.</div>
+        <div class="specs-list">
+          <span class="spec-tag accent">🎉 توفير كبير</span>
+          <span class="spec-tag">⏳ عرض محدود</span>
+          <span class="spec-tag">🚚 توصيل مجاني</span>
+          <span class="spec-tag">🔧 ضمان شامل</span>
+        </div>
+        <div class="product-footer">
+          <div class="price">سعر خاص <span>🇩🇿 دج</span></div>
+          <button class="btn-buy" onclick="window.location='#contact'">💬 تواصل معنا</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="why-section" id="why">
+  <section style="padding: 0 24px; max-width: 1200px; margin: 0 auto;">
+    <div class="section-header" style="margin-bottom: 48px;">
+      <h2 style="color: white;">لماذا تختارنا؟</h2>
+      <p style="color: rgba(255,255,255,0.5);">نحن نفخر بتقديم أفضل خدمة في الجزائر</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card"><span class="why-icon">🏆</span><h3>منتجات أصلية 100%</h3><p>جميع أجهزتنا أصلية ومعتمدة من الموزعين الرسميين في الجزائر</p></div>
+      <div class="why-card"><span class="why-icon">🚀</span><h3>توصيل لكل الولايات</h3><p>نوصل لجميع الـ 58 ولاية بأمان وسرعة عبر شركاء التوصيل الموثوقين</p></div>
+      <div class="why-card"><span class="why-icon">🔧</span><h3>ضمان وصيانة</h3><p>ضمان معتمد على جميع الأجهزة مع خدمة ما بعد البيع على مستوى عالٍ</p></div>
+      <div class="why-card"><span class="why-icon">💰</span><h3>أسعار لا تُنافَس</h3><p>نضمن أفضل الأسعار في السوق الجزائرية مع خيارات دفع مرنة</p></div>
+    </div>
+  </section>
+</div>
+
+<div style="max-width: 900px; margin: 60px auto 0;">
+  <div class="contact-section" id="contact">
+    <h2>📞 تواصل مع AM SAT DZ</h2>
+    <p>هل لديك سؤال؟ هل تريد الطلب؟ نحن هنا من الساعة 8ص إلى 8م — كل يوم!</p>
+    <div class="contact-buttons">
+      <a href="https://wa.me/213XXXXXXXXX" class="btn-whatsapp">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.113.552 4.094 1.515 5.814L.057 23.7c-.074.285.085.556.359.63.07.019.14.028.21.028.21 0 .414-.08.565-.232l5.942-5.887C8.44 19.434 10.18 20 12 20c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 18c-1.693 0-3.303-.476-4.685-1.303l-3.296 3.265 1.031-3.97C3.716 14.746 2 13.464 2 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
+        واتساب
+      </a>
+      <a href="tel:+213XXXXXXXXX" class="btn-call">📱 اتصل بنا</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p class="brand-footer"><em>AM</em> SAT <em>DZ</em></p>
+  <p>© 2026 — الجزائر 🇩🇿 | جميع الحقوق محفوظة</p>
+  <p style="margin-top:6px;font-size:11px;color:rgba(255,255,255,0.2);">أجهزة استقبال فضائي رقمية | Icone D20 • Cristor Thunder TH500</p>
+</footer>
+<div class="top-stripe"></div>
+</body>
+</html>
